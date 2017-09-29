@@ -29,11 +29,22 @@ const log = message => {
 }
 
 const handler = (req, res) => {
+  const agent = req.headers['user-agent']
+  if (agent === 'ELB-HealthChecker/2.0') {
+    res.writeHead(200, {
+      'Content-Length': 0,
+      Connection: 'close'
+    })
+    res.end()
+    return
+  }
+
   const hostname = req.headers.host
   const target = redirects[hostname] ? redirects[hostname] : null
 
   if (!target) {
     log(`no target to redirect for ${hostname}`)
+    log(JSON.stringify(req.headers))
     res.writeHead(400, {
       'Content-Length': 0,
       Connection: 'close'
