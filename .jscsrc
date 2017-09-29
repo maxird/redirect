@@ -1,0 +1,18 @@
+{
+  "preset": "node-style-guide",
+  "excludeFiles": [
+  ],
+  "requireCurlyBraces": [
+    "try",
+    "catch",
+    "finally"
+  ],
+  "maximumLineLength": 132,
+  "requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
+  "requireSpacesInFunction": null,
+  "disallowSpacesInFunction": null,
+  "disallowCapitalizedComments": null,
+  "requireCapitalizedComments": null,
+  "requireSpaceAfterLineComment": null,
+  "requireTrailingComma": false
+}

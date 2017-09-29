@@ -1,0 +1,9 @@
+{
+  "asi": true,
+  "esnext": true,
+  "node": true,
+  "module": true,
+  "devel": false,
+  "maxlen": 132,
+  "maxcomplexity": 10
+}
