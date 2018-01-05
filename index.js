@@ -44,7 +44,13 @@ const handler = (req, res) => {
 
   if (!target) {
     log(`no target to redirect for ${hostname}`)
-    log(JSON.stringify(req.headers))
+    Object.keys(req.headers).forEach(key => {
+      const v = req.headers[key]
+      if (v) {
+        const text = v.replace(/[^\x20-\x7F]/g, '?')
+        log(`header[${key}]:[${text}]`)
+      }
+    })
     res.writeHead(400, {
       'Content-Length': 0,
       Connection: 'close'
