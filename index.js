@@ -3,6 +3,7 @@ const http = require('http')
 const URL = require('url')
 
 const PORT = process.env.PORT || 3000
+const TRIAGE = process.env.TRIAGE ? true : false
 
 const redirects = {}
 
@@ -28,8 +29,22 @@ const log = message => {
   console.log(`${time}: ${message}`)
 }
 
+const logHeaders = req => {
+  Object.keys(req.headers).forEach(key => {
+    const v = req.headers[key]
+    if (v) {
+      const text = v.replace(/[^\x20-\x7F]/g, '?')
+      log(`header[${key}]:[${text}]`)
+    }
+  })
+}
+
 const handler = (req, res) => {
   const agent = req.headers['user-agent']
+  if (TRIAGE) {
+    log(`request from ${agent}`)
+    logHeaders(req)
+  }
   if (agent === 'ELB-HealthChecker/2.0') {
     res.writeHead(200, {
       'Content-Length': 0,
@@ -44,13 +59,7 @@ const handler = (req, res) => {
 
   if (!target) {
     log(`no target to redirect for ${hostname}`)
-    Object.keys(req.headers).forEach(key => {
-      const v = req.headers[key]
-      if (v) {
-        const text = v.replace(/[^\x20-\x7F]/g, '?')
-        log(`header[${key}]:[${text}]`)
-      }
-    })
+    logHeaders(req)
     res.writeHead(400, {
       'Content-Length': 0,
       Connection: 'close'
