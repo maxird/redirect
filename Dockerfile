@@ -1,4 +1,4 @@
-FROM maxird/node:7-6
+FROM maxird/node:7-10
 
 LABEL Name redirect
 LABEL Version 0.9.0
