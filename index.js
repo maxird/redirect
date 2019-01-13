@@ -1,4 +1,5 @@
-'use strict'
+// @ts-check
+//
 const http = require('http')
 const URL = require('url')
 

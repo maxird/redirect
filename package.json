@@ -3,9 +3,35 @@
   "version": "0.9.0",
   "description": "http redirect app",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "ryan",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "jshintConfig": {
+    "esversion": 6,
+    "asi": true
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "globals": {
+      "process": true,
+      "__dirname": true,
+      "console": true
+    },
+    "rules": {
+      "max-len": [
+        2,
+        132,
+        2
+      ],
+      "semi": [
+        2,
+        "never"
+      ]
+    }
+  }
 }
